@@ -30,4 +30,14 @@ router.delete('/:id', blogFinder, async (req, res) => {
   }
 })
 
+router.put('/:id', blogFinder, async (req, res) => {
+  if (req.blog) {
+    req.blog.likes = req.body.likes
+    await req.blog.save()
+    res.json(res.blog)
+  } else {
+    res.status(404).end()
+  }
+})
+
 module.exports = router
